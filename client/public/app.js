@@ -403,3 +403,5 @@ window.addEventListener("hashchange", route);
 loadListings();
 api("/api/listings?sort=rating&limit=50").then(rememberNeighbourhoods).catch(() => {});
 route();
+const hostsRouter = require("./routes/hosts.routes");
+app.use("/api/hosts", hostsRouter);

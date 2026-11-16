@@ -1,6 +1,7 @@
 // Starts the server: node server.js (or npm start / npm run dev)
 require("dotenv").config({ path: require("node:path").join(__dirname, ".env"), quiet: true });
 const app = require("./app");
+const { sql, poolPromise } = require("./config/db");
 
 const PORT = process.env.PORT || 3000;
 
@@ -13,3 +14,9 @@ const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
   console.log(`Server running on http://localhost:${PORT}`);
 });
+
+poolPromise.then(()=>{
+  console.log("Connected To SQL Server");
+}).catch((err)=>{
+  console.log("Database connection failed:",err.message);
+})
